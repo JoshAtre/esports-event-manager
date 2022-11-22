@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h2>Players</h2>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for player in players %}
+            <div v-for="movie in movies" class="col">
+                <div class="card">
+                    <img class="card-img-top" src="{{ player.profile_photo.url }}" />
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold">{{ player.name }}</h5>
+                        <img style="width:50px" src="{{ player.team.logo.url }}" />
+                        <span class="card-text">{{ player.team }}</span>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock content %}
