@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h2>Teams</h2>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for team in teams %}
+            <div v-for="movie in movies" class="col">
+                <div class="card">
+                    <!--<img class="card-img-top" src="{{ player.profile_photo.url }}" />-->
+                    <div class="card-body" style="text-align:center">
+                        <img style="width:150px" src="{{ team.logo.url }}"/>
+                        <h5 class="card-title fw-bold">{{team.game}}{{' '}}{{team.color}}</h5>
+                        <!--<span class="card-text">{{ player.team }}</span>-->
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock content %}

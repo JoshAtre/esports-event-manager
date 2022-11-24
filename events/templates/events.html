@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h2>Events</h2>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for event in events %}
+            <div v-for="event in events" class="col">
+                <div class="card">
+                    <img class="card-img-top" src="{{ event.image.url }}" />
+                    <div class="card-body">
+                        <a href="{% url 'eventDetail' event.id %}">
+                            <h5 class="card-title fw-bold">{{ event.name }}</h5>
+                        </a>
+                        <p class="card-text">{{ event.venues }}</p>
+                        <p class="card-text">Starts {{ event.start_date }}</p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock content %}
