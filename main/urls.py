@@ -29,8 +29,12 @@ urlpatterns = [
     path('events/', eventsViews.events, name='events'),
     # path('events/<int:event_id>', eventsViews.detail, name='eventDetail'),
     path('events/detail/<int:event_id>', eventsViews.detail, name='eventDetail'),
+<<<<<<< HEAD
     path('accounts/', include('accounts.urls')),
     path('teams/', teamsViews.teams, name='teams')
+=======
+    path('accounts/', include('accounts.urls'))
+>>>>>>> ffd72ccd99301abcf0fdd2a4196cd706dc66cd17
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
