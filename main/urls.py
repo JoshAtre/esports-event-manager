@@ -25,6 +25,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', accountsViews.home, name='home'),
     path('players/', teamsViews.players, name='players'),
+    path('players/<str:player_id>/', teamsViews.playerInfo, name='playerInfo'),
+    path('createteam', teamsViews.createTeam, name='createTeam'),
     # path('events/', include('events.urls')),
     path('events/', eventsViews.events, name='events'),
     # path('events/<int:event_id>', eventsViews.detail, name='eventDetail'),

@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h2>Create Team</h2>
+    <form action="" method="POST">
+        {% csrf_token%}
+        {{form}}
+        <input type="submit" name = "Submit">
+    </form>
+
+{% endblock content %}

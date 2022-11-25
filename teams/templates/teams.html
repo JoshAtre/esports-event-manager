@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
     <h2>Teams</h2>
-    <div class="row row-cols-1 row-cols-md-3 g-4">
+    <div class="row row-cols-1 row-cols-md-4 g-4">
         {% for team in teams %}
             <div v-for="movie in movies" class="col">
                 <div class="card">
@@ -14,5 +14,12 @@
                 </div>
             </div>
         {% endfor %}
+
+        <div class ="card">
+            <div class="card-body" style="text-align:center">
+                <h5 class ="card-title fw-bold">Add Team</h5>
+            </div>
+        </div>
+
     </div>
 {% endblock content %}
