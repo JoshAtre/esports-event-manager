@@ -1,11 +1,33 @@
 {% extends 'base.html' %}
 {% block content %}
     <h2>Events</h2>
+    <div style="width:200px;margin:15px 0">
+        <form method="POST">
+            {% csrf_token %}
+            <select id="eventFilter" name="eventFilter" onchange="form.submit()" class="form-control">
+                <option value="allEvents"
+                        {% if eventFilter == 'allEvents' %}
+                        selected
+                        {% endif %} >All events
+                </option>
+                <option value="myEvents"
+                        {% if eventFilter == 'myEvents' %}
+                        selected
+                        {% endif %} >My team's events
+                </option>
+                <option value="unregisteredEvents"
+                        {% if eventFilter == 'unregisteredEvents' %}
+                        selected
+                        {% endif %} >Unregistered events
+                </option>
+            </select>
+        </form>
+    </div>
     <div class="row row-cols-1 row-cols-md-3 g-4">
         {% for event in events %}
             <div v-for="event in events" class="col">
                 <div class="card">
-                    <img class="card-img-top" src="{{ event.image.url }}" />
+                    <img class="card-img-top" src="{{ event.image.url }}"/>
                     <div class="card-body">
                         <a href="{% url 'eventDetail' event.id %}">
                             <h5 class="card-title fw-bold">{{ event.name }}</h5>
