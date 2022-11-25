@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 
 from .models import *
-from .forms import CreateTeamForm
+from .forms import TeamForm
 
 
 # Create your views here.
@@ -22,7 +22,7 @@ def playerInfo(request, player_id):
 
 def createTeam(request):
     if request.method == "POST":
-        form = CreateTeamForm(request.POST)
+        form = TeamForm(request.POST)
         if form.is_valid():
             try:
                 form.save()
@@ -30,7 +30,20 @@ def createTeam(request):
             except:
                 pass
     else:
-        form = CreateTeamForm()
+        form = TeamForm()
+    return render(request, 'createteam.html', {'form': form})
+
+def updateTeam(request, team_id):
+    team = Team.objects.get(id=team_id)
+    form = TeamForm(instance=team)
+    if request.method == "POST":
+        form = TeamForm(request.POST, instance=team)
+        if form.is_valid():
+            try:
+                form.save()
+                return redirect('teams')
+            except:
+                pass
     return render(request, 'createteam.html', {'form': form})
 
 

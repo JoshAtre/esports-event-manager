@@ -5,6 +5,7 @@
         {% for player in players %}
             <div v-for="movie in movies" class="col">
                 <div class="card">
+                    <!-- TODO: ADD ELSE BEHAVIOR TO DISPLAYING IMAGES -->
                     <img class="card-img-top" src="{{ player.profile_photo.url }}" />
                     <div class="card-body">
                         <h5 class="card-title fw-bold">{{ player.name }}</h5>
