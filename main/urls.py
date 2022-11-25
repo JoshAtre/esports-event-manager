@@ -25,6 +25,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', accountsViews.home, name='home'),
     path('players/', teamsViews.players, name='players'),
+    path('players/create_player/', teamsViews.createPlayer, name='createPlayer'),
+    path('players/update_player/<str:player_id>', teamsViews.updatePlayer, name='updatePlayer'),
     path('players/<str:player_id>/', teamsViews.playerInfo, name='playerInfo'),
     path('teams/create_team', teamsViews.createTeam, name='createTeam'),
     path('teams/update_team/<str:team_id>', teamsViews.updateTeam, name='updateTeam'),

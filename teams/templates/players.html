@@ -11,6 +11,10 @@
                         <h5 class="card-title fw-bold">{{ player.name }}</h5>
                         <img style="width:50px" src="{{ player.team.logo.url }}" />
                         <span class="card-text">{{ player.team }}</span>
+                        <br>
+                        <button type = "button" class="button">
+                            <td><a href="{% url 'updatePlayer' player.id %}">Update Info</a></td>
+                        </button>
                     </div>
                 </div>
             </div>
