@@ -53,7 +53,7 @@ def detail(request, event_id):
         message = "You've successfully registered your team for " + event.name + "!"
         print(settings.EMAIL_HOST_USER)
         print(settings.EMAIL_HOST_PASSWORD)
-        send_mail(subject="Event registration", message=message, from_email=settings.EMAIL_HOST_USER,
+        send_mail(subject="Event registration", message=message, from_email="SCU eSports <noreply@egames.scu.edu>",
                   recipient_list=[request.user.username])
         messages.success(request, "You've successfully registered your team for this event")
 
