@@ -4,15 +4,34 @@ from teams.models import Player
 from events.models import EventRegistration
 from django.shortcuts import get_object_or_404
 from django.contrib import messages
+from django.core.mail import send_mail
+from django.conf import settings
 
 
 # Create your views here.
 def events(request):
-    events = Event.objects.all()
-    return render(request, 'events.html', {'events': events})
+    if request.method == "GET":
+        events = Event.objects.all()
+        return render(request, 'events.html', {'events': events, 'eventFilter': 'allEvents'})
+    else:
+        event_filter = request.POST['eventFilter']
+        if event_filter == 'allEvents':
+            events = Event.objects.all()
+        elif event_filter == 'unregisteredEvents':
+            # Show unregistered events
+            player_team_id = get_team_id(request.user)
+            registered_event_ids = EventRegistration.objects.filter(team_id=player_team_id).values_list('event_id', flat=True)
+            events = Event.objects.exclude(pk__in=registered_event_ids)
+        else:
+            # Show only my team's events
+            player_team_id = get_team_id(request.user)
+            registered_event_ids = EventRegistration.objects.filter(team_id=player_team_id).values_list('event_id', flat=True)
+            events = Event.objects.filter(pk__in=registered_event_ids)
+        return render(request, 'events.html', {'events': events, 'eventFilter': event_filter})
+
 
 def detail(request, event_id):
-    player_team_id = get_team_id(request.user)            
+    player_team_id = get_team_id(request.user)
 
     if request.method == "GET":
         # See if the player's team is already registered for the event
@@ -20,28 +39,35 @@ def detail(request, event_id):
         registered = False
         if len(regs) > 0:
             registered = True
-            
+
         event = get_object_or_404(Event, pk=event_id)
         return render(request, 'detail.html', {'event': event, 'registered': registered})
     else:
-        # Register the player's team for the event        
-        eventRegistration = EventRegistration(event_id=event_id, team_id=player_team_id)
-        eventRegistration.save()
-        
-        messages.success(request, "You've successfully registered your team for this event")
-    
-        # return redirect('events') # TODO: Check
+        # Register the player's team for the event
+        event_registration = EventRegistration(event_id=event_id, team_id=player_team_id)
+        event_registration.save()
+
         event = get_object_or_404(Event, pk=event_id)
+
+        # Send email to the player
+        message = "You've successfully registered your team for " + event.name + "!"
+        print(settings.EMAIL_HOST_USER)
+        print(settings.EMAIL_HOST_PASSWORD)
+        send_mail(subject="Event registration", message=message, from_email="SCU eSports <noreply@egames.scu.edu>",
+                  recipient_list=[request.user.username])
+        messages.success(request, "You've successfully registered your team for this event")
+
         return render(request, 'detail.html', {'event': event, 'registered': True})
-        
+
 
 def get_team_id(user):
     if user.is_authenticated:
-        email = user.email
+        # Note that usernames must be email addresses
+        email = user.username
         if email is not None:
-            matchingPlayers = Player.objects.filter(email=email)
-            if len(matchingPlayers) > 0:
-                player = matchingPlayers[0]
+            matching_players = Player.objects.filter(email=email)
+            if len(matching_players) > 0:
+                player = matching_players[0]
                 return player.team_id
     
     return None
