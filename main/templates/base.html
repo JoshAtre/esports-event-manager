@@ -7,19 +7,23 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
     </head>
     <body>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light mb-3">
+        <nav class="navbar navbar-expand-xxl navbar-light mb-3" style="background-color: #b30738">
             <div class="container">
-                <a class="navbar-brand" href="{% url 'events' %}">Events</a>
-                <a class="navbar-brand" href="{% url 'players' %}">Players</a>
+
+                <a class="navbar-brand" style="color:white" href="{% url 'home' %}">Home</a>
+                <a class="navbar-brand" style="color:white" href="{% url 'events' %}">Events</a>
+                <a class="navbar-brand" style="color:white" href="{% url 'teams' %}">Teams</a>
+                <a class="navbar-brand" style="color:white" href="{% url 'players' %}">Players</a>
+
                 <button class="navbar-toggler" type="button"  data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div class="navbar-nav ms-auto">
                         {% if user.is_authenticated %}
-                            <a class="nav-link" href="{% url 'logoutaccount' %}">Logout ({{ user.username }})</a>
+                            <a class="nav-link" style="color:white" href="{% url 'logoutaccount' %}">Logout ({{ user.username }})</a>
                         {% else %}
-                            <a class="nav-link" href="{% url 'loginaccount' %}">Login</a>
+                            <a class="nav-link" style="color:white" href="{% url 'loginaccount' %}">Login</a>
                         {% endif %}
                     </div>
                 </div>

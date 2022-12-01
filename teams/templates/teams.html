@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <h2>Teams</h2>
+    <div class="row row-cols-1 row-cols-md-4 g-4">
+        {% for team in teams %}
+            <div v-for="movie in movies" class="col">
+                <div class="card">
+                    <!--<img class="card-img-top" src="{{ player.profile_photo.url }}" />-->
+                    <div class="card-body" style="text-align:center">
+                        <!-- TODO: ADD ELSE BEHAVIOR TO DISPLAYING IMAGES -->
+                        {% if team.logo %}
+                            <img style="width:150px" src="{{ team.logo.url }}"/>
+                        {% endif %}
+                        <h5 class="card-title fw-bold">{{team.game}}{{' '}}{{team.color}}</h5>
+                        <br>
+                                <a href="{% url 'teamInfo' team.id %}" class="btn btn-primary">View Players</a>
+                            <!-- TODO: hide updateTeam for non-admins-->
+                                {% if user.is_superuser %}
+                                <a href="{% url 'updateTeam' team.id %}" class="btn btn-primary">Update Info</a>
+                                {% endif %}
+                        <!--<span class="card-text">{{ player.team }}</span>-->
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+
+        {% if user.is_superuser %}
+        <div class ="card">
+            <div class="card-body" style="text-align:center">
+                <h5 class ="card-title fw-bold">Add Team</h5>
+                <!--<a href="create_team" class="stretched-link"></a>-->
+                <br>
+                <a href="create_team" ><img src="{% static 'plus_in_circle.png' %}" width="180" height="180"> </a>
+            </div>
+        </div>
+        {% endif %}
+
+    </div>
+{% endblock content %}

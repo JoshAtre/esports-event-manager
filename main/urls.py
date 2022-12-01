@@ -18,6 +18,7 @@ from django.urls import path, include
 from events import views as eventsViews
 from teams import views as teamsViews
 from accounts import views as accountsViews
+from calendarApp import views as calendarViews
 from django.conf.urls.static import static
 from django.conf import settings
 
@@ -25,11 +26,23 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', accountsViews.home, name='home'),
     path('players/', teamsViews.players, name='players'),
+    path('players/create_player/', teamsViews.createPlayer, name='createPlayer'),
+    path('players/update_player/<str:player_id>', teamsViews.updatePlayer, name='updatePlayer'),
+    path('players/<str:player_id>/', teamsViews.playerInfo, name='playerInfo'),
+    path('teams/create_team', teamsViews.createTeam, name='createTeam'),
+    path('teams/update_team/<str:team_id>', teamsViews.updateTeam, name='updateTeam'),
+    path('teams/<str:team_id>', teamsViews.teamInfo, name='teamInfo'),
+    path('calendar/', calendarViews.calendar, name='calendar'),
     # path('events/', include('events.urls')),
     path('events/', eventsViews.events, name='events'),
     # path('events/<int:event_id>', eventsViews.detail, name='eventDetail'),
     path('events/detail/<int:event_id>', eventsViews.detail, name='eventDetail'),
-    path('accounts/', include('accounts.urls'))
+    path('events/create_event', eventsViews.createEvent, name='createEvent'),
+    path('events/update_event/<str:event_id>', eventsViews.updateEvent, name='updateEvent'),
+    path('accounts/', include('accounts.urls')),
+    path('teams/', teamsViews.teams, name='teams'),
+    path('calendar/', include('calendarApp.urls')),
 ]
+
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
