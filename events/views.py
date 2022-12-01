@@ -20,12 +20,14 @@ def events(request):
         elif event_filter == 'unregisteredEvents':
             # Show unregistered events
             player_team_id = get_team_id(request.user)
-            registered_event_ids = EventRegistration.objects.filter(team_id=player_team_id).values_list('event_id', flat=True)
+            registered_event_ids = EventRegistration.objects.filter(team_id=player_team_id).values_list('event_id',
+                                                                                                        flat=True)
             events = Event.objects.exclude(pk__in=registered_event_ids)
         else:
             # Show only my team's events
             player_team_id = get_team_id(request.user)
-            registered_event_ids = EventRegistration.objects.filter(team_id=player_team_id).values_list('event_id', flat=True)
+            registered_event_ids = EventRegistration.objects.filter(team_id=player_team_id).values_list('event_id',
+                                                                                                        flat=True)
             events = Event.objects.filter(pk__in=registered_event_ids)
         return render(request, 'events.html', {'events': events, 'eventFilter': event_filter})
 
