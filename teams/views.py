@@ -21,9 +21,12 @@ def playerInfo(request, player_id):
     player = Player.objects.get(id=player_id)
     return render(request, 'playerinfo.html', {'player': player})
 
+
 def teamInfo(request, team_id):
-    team = Team.objects.get(id=team_id)
-    return render(request, 'teaminfo.html', {'team': team})
+    team_players_id = Player.objects.filter(team_id=team_id)
+    players = Player.objects.filter(pk__in=team_players_id)
+    return render(request, 'players.html', {'players': players})
+
 
 def createTeam(request):
     if request.method == "POST":
@@ -38,6 +41,7 @@ def createTeam(request):
         form = TeamForm()
     return render(request, 'createteam.html', {'form': form})
 
+
 def updateTeam(request, team_id):
     team = Team.objects.get(id=team_id)
     form = TeamForm(instance=team)
@@ -50,6 +54,7 @@ def updateTeam(request, team_id):
             except:
                 pass
     return render(request, 'createteam.html', {'form': form})
+
 
 def createPlayer(request):
     if request.method == "POST":

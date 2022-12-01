@@ -1,5 +1,23 @@
 {% extends 'base.html' %}
 {% block content %}
-    <h2>Player Name</h2>
-
+    <div class="card mb-2">
+        <div class="row g-0">
+            <div class="col-md-4">
+                <img src="{{ player.profile_photo.url }}" class="img-fluid rounded-start" alt="">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h2 class="card-title">{{ player.name }}</h2>
+                    <img style="width:50px" src="{{ player.team.logo.url }}" />
+                    <span class="card-text">{{ player.team }}</span>
+                    <br>
+                    <br>
+                    <h4>Email: {{ player.email }}</h4>
+                    <h4>Discord: {{ player.discord }}</h4>
+                    <h4>Rank: {{ player.rank }}</h4>
+                    <h4>Rank Division: {{ player.rank_division }}</h4>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock content %}
