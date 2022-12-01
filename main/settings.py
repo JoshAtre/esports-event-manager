@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'accounts',
     'teams',
     'events',
+    'calendarApp',
 ]
 
 MIDDLEWARE = [

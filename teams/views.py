@@ -5,6 +5,8 @@ from .forms import TeamForm, PlayerForm
 
 
 # Create your views here.
+
+
 def players(request):
     players = Player.objects.all()
     return render(request, 'players.html', {'players': players})
