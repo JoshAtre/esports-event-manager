@@ -18,6 +18,7 @@ from django.urls import path, include
 from events import views as eventsViews
 from teams import views as teamsViews
 from accounts import views as accountsViews
+from calendarApp import views as calendarViews
 from django.conf.urls.static import static
 from django.conf import settings
 
@@ -25,11 +26,13 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', accountsViews.home, name='home'),
     path('players/', teamsViews.players, name='players'),
+    path('calendar/', calendarViews.calendar, name='calendar'),
     # path('events/', include('events.urls')),
     path('events/', eventsViews.events, name='events'),
     # path('events/<int:event_id>', eventsViews.detail, name='eventDetail'),
     path('events/detail/<int:event_id>', eventsViews.detail, name='eventDetail'),
-    path('accounts/', include('accounts.urls'))
-]
+    path('accounts/', include('accounts.urls')),
+    path('calendar/', include('calendarApp.urls')),
+    ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
