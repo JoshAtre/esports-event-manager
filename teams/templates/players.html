@@ -12,8 +12,10 @@
                         <img style="width:50px" src="{{ player.team.logo.url }}" />
                         <span class="card-text">{{ player.team }}</span>
                         <br>
-                        <button type = "button" class="button">
-                            <td><a href="{% url 'updatePlayer' player.id %}">Update Info</a></td>
+                            <a href="{% url 'playerInfo' player.id %}" class="btn btn-primary">View Info</a>
+                        <!-- TODO: hide updateTeam for non-admins-->
+                            <a href="{% url 'updatePlayer' player.id %}" class="btn btn-primary">Update Info</a>
+
                         </button>
                     </div>
                 </div>

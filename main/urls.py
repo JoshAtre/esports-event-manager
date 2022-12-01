@@ -30,6 +30,7 @@ urlpatterns = [
     path('players/<str:player_id>/', teamsViews.playerInfo, name='playerInfo'),
     path('teams/create_team', teamsViews.createTeam, name='createTeam'),
     path('teams/update_team/<str:team_id>', teamsViews.updateTeam, name='updateTeam'),
+    path('teams/<str:team_id>', teamsViews.teamInfo, name='teamInfo'),
     # path('events/', include('events.urls')),
     path('events/', eventsViews.events, name='events'),
     # path('events/<int:event_id>', eventsViews.detail, name='eventDetail'),

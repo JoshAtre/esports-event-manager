@@ -19,6 +19,9 @@ def playerInfo(request, player_id):
     player = Player.objects.get(id=player_id)
     return render(request, 'playerinfo.html', {'player': player})
 
+def teamInfo(request, team_id):
+    team = Team.objects.get(id=team_id)
+    return render(request, 'teaminfo.html', {'team': team})
 
 def createTeam(request):
     if request.method == "POST":
