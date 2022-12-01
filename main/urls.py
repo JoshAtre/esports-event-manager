@@ -37,6 +37,8 @@ urlpatterns = [
     path('events/', eventsViews.events, name='events'),
     # path('events/<int:event_id>', eventsViews.detail, name='eventDetail'),
     path('events/detail/<int:event_id>', eventsViews.detail, name='eventDetail'),
+    path('events/create_event', eventsViews.createEvent, name='createEvent'),
+    path('events/update_event/<str:event_id>', eventsViews.updateEvent, name='updateEvent'),
     path('accounts/', include('accounts.urls')),
     path('teams/', teamsViews.teams, name='teams'),
     path('calendar/', include('calendarApp.urls')),

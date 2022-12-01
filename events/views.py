@@ -1,11 +1,13 @@
 from django.shortcuts import redirect, render
 from .models import Event
+from .forms import *
 from teams.models import Player
 from events.models import EventRegistration
 from django.shortcuts import get_object_or_404
 from django.contrib import messages
 from django.core.mail import send_mail
 from django.conf import settings
+from teams.decorators import *
 
 
 # Create your views here.
@@ -71,4 +73,33 @@ def get_team_id(user):
                 return player.team_id
     
     return None
-    
+
+@unauthenticated_user
+@allowed_users(allowed_groups=['Admin'])
+def createEvent(request):
+    if request.method == "POST":
+        form = EventForm(request.POST, request.FILES)
+        if form.is_valid():
+            try:
+                form.save()
+                return redirect('events')
+            except:
+                pass
+    else:
+        form = EventForm()
+    return render(request, 'createevent.html', {'form': form})
+
+@unauthenticated_user
+@allowed_users(allowed_groups=['Admin'])
+def updateEvent(request, event_id):
+    event = Team.objects.get(id=event_id)
+    form = EventForm(instance=event)
+    if request.method == "POST":
+        form = EventForm(request.POST, request.FILES, instance=event)
+        if form.is_valid():
+            try:
+                form.save()
+                return redirect('events')
+            except:
+                pass
+    return render(request, 'createevent.html', {'form': form})
