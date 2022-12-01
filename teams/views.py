@@ -22,7 +22,7 @@ def playerInfo(request, player_id):
 
 def createTeam(request):
     if request.method == "POST":
-        form = TeamForm(request.POST)
+        form = TeamForm(request.POST, request.FILES)
         if form.is_valid():
             try:
                 form.save()
@@ -37,7 +37,7 @@ def updateTeam(request, team_id):
     team = Team.objects.get(id=team_id)
     form = TeamForm(instance=team)
     if request.method == "POST":
-        form = TeamForm(request.POST, instance=team)
+        form = TeamForm(request.POST, request.FILES, instance=team)
         if form.is_valid():
             try:
                 form.save()
@@ -48,7 +48,7 @@ def updateTeam(request, team_id):
 
 def createPlayer(request):
     if request.method == "POST":
-        form = PlayerForm(request.POST)
+        form = PlayerForm(request.POST, request.FILES)
         if form.is_valid():
             try:
                 form.save()
@@ -64,7 +64,7 @@ def updatePlayer(request, player_id):
     player = Player.objects.get(id=player_id)
     form = PlayerForm(instance=player)
     if request.method == "POST":
-        form = PlayerForm(request.POST, instance=player)
+        form = PlayerForm(request.POST, request.FILES, instance=player)
         if form.is_valid():
             try:
                 form.save()
