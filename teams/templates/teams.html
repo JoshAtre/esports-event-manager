@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h2>Teams</h2>
+    <div class="row row-cols-1 row-cols-md-4 g-4">
+        {% for team in teams %}
+            <div v-for="movie in movies" class="col">
+                <div class="card">
+                    <!--<img class="card-img-top" src="{{ player.profile_photo.url }}" />-->
+                    <div class="card-body" style="text-align:center">
+                        <!-- TODO: ADD ELSE BEHAVIOR TO DISPLAYING IMAGES -->
+                        {% if team.logo %}
+                            <img style="width:150px" src="{{ team.logo.url }}"/>
+                        {% endif %}
+                        <h5 class="card-title fw-bold">{{team.game}}{{' '}}{{team.color}}</h5>
+                        <br>
+                        <button type = "button" class="button">
+                            <td><a href="{% url 'updateTeam' team.id %}">Update Info</a></td>
+                        <!--<span class="card-text">{{ player.team }}</span>-->
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+
+        <div class ="card">
+            <div class="card-body" style="text-align:center">
+                <h5 class ="card-title fw-bold">Add Team</h5>
+            </div>
+        </div>
+
+    </div>
+{% endblock content %}
