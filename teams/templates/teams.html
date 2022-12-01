@@ -13,9 +13,9 @@
                         {% endif %}
                         <h5 class="card-title fw-bold">{{team.game}}{{' '}}{{team.color}}</h5>
                         <br>
-                            <a href="{% url 'teamInfo' team.id %}" class="btn btn-primary">View Info</a>
-                        <!-- TODO: hide updateTeam for non-admins-->
-                            <a href="{% url 'updateTeam' team.id %}" class="btn btn-primary">Update Info</a>
+                                <a href="{% url 'teamInfo' team.id %}" class="btn btn-primary">View Info</a>
+                            <!-- TODO: hide updateTeam for non-admins-->
+                                <a href="{% url 'updateTeam' team.id %}" class="btn btn-primary">Update Info</a>
                         <!--<span class="card-text">{{ player.team }}</span>-->
                     </div>
                 </div>
