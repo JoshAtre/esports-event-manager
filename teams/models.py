@@ -22,4 +22,4 @@ class Player(models.Model):
     profile_photo = models.ImageField(upload_to="teams/images/")
 
     def __str__(self):
-        return (self.name)
+        return self.name
