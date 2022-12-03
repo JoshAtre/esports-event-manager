@@ -76,6 +76,7 @@ def get_team_id(user):
     
     return None
 
+
 @unauthenticated_user
 @allowed_users(allowed_groups=['Admin'])
 def createEvent(request):
@@ -90,6 +91,7 @@ def createEvent(request):
     else:
         form = EventForm()
     return render(request, 'createevent.html', {'form': form})
+
 
 @unauthenticated_user
 @allowed_users(allowed_groups=['Admin'])

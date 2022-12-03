@@ -17,7 +17,7 @@
                                 <a href="{% url 'teamInfo' team.id %}" class="btn btn-primary">View Players</a>
                             <!-- TODO: hide updateTeam for non-admins-->
                                 {% if user.is_superuser %}
-                                <a href="{% url 'updateTeam' team.id %}" class="btn btn-primary">Update Info</a>
+                                    <a href="{% url 'updateTeam' team.id %}" class="btn btn-primary">Update Info</a>
                                 {% endif %}
                         <!--<span class="card-text">{{ player.team }}</span>-->
                     </div>

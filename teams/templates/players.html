@@ -14,13 +14,13 @@
                         <span class="card-text">{{ player.team }}</span>
                         <br>
                         <br>
+                        {% if user.is_authenticated %}
                             <a href="{% url 'playerInfo' player.id %}" class="btn btn-primary">View Info</a>
+                        {% endif %}
                         <!-- TODO: hide updateTeam for non-admins-->
                         {% if user.is_superuser %}
-                        <a href="{% url 'updatePlayer' player.id %}" class="btn btn-primary">Update Info</a>
+                            <a href="{% url 'updatePlayer' player.id %}" class="btn btn-primary">Update Info</a>
                         {% endif %}
-
-                        </button>
                     </div>
                 </div>
             </div>
