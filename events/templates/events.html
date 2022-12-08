@@ -1,27 +1,30 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
     <h2>Events</h2>
     <div style="width:200px;margin:15px 0">
-        <form method="POST">
-            {% csrf_token %}
-            <select id="eventFilter" name="eventFilter" onchange="form.submit()" class="form-control">
-                <option value="allEvents"
-                        {% if eventFilter == 'allEvents' %}
-                        selected
-                        {% endif %} >All events
-                </option>
-                <option value="myEvents"
-                        {% if eventFilter == 'myEvents' %}
-                        selected
-                        {% endif %} >My team's events
-                </option>
-                <option value="unregisteredEvents"
-                        {% if eventFilter == 'unregisteredEvents' %}
-                        selected
-                        {% endif %} >Unregistered events
-                </option>
-            </select>
-        </form>
+        {% if user.is_authenticated %}
+            <form method="POST">
+                {% csrf_token %}
+                <select id="eventFilter" name="eventFilter" onchange="form.submit()" class="form-control">
+                    <option value="allEvents"
+                            {% if eventFilter == 'allEvents' %}
+                            selected
+                            {% endif %} >All events
+                    </option>
+                    <option value="myEvents"
+                            {% if eventFilter == 'myEvents' %}
+                            selected
+                            {% endif %} >My team's events
+                    </option>
+                    <option value="unregisteredEvents"
+                            {% if eventFilter == 'unregisteredEvents' %}
+                            selected
+                            {% endif %} >Unregistered events
+                    </option>
+                </select>
+            </form>
+        {% endif %}
     </div>
     <div class="row row-cols-1 row-cols-md-4 g-4">
         {% for event in events %}
@@ -38,5 +41,15 @@
                 </div>
             </div>
         {% endfor %}
+        {% if user.is_superuser %}
+            <div class ="card">
+                <div class="card-body" style="text-align:center">
+                    <h5 class ="card-title fw-bold">Add Event</h5>
+                    <!--<a href="create_team" class="stretched-link"></a>-->
+                    <br>
+                    <a href="/events/create_event" ><img src="{% static 'plus_in_circle.png' %}" width="180" height="180"> </a>
+                </div>
+            </div>
+        {% endif %}
     </div>
 {% endblock content %}

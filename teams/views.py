@@ -17,15 +17,14 @@ def teams(request):
     teams = Team.objects.all()
     return render(request, 'teams.html', {'teams': teams})
 
+
 @unauthenticated_user
-@allowed_users(allowed_groups=['Admin','Player'])
+@allowed_users(allowed_groups=['Admin', 'Player'])
 def playerInfo(request, player_id):
     player = Player.objects.get(id=player_id)
     return render(request, 'playerinfo.html', {'player': player})
 
 
-@unauthenticated_user
-@allowed_users(allowed_groups=['Admin', 'Player'])
 def teamInfo(request, team_id):
     team_players_id = Player.objects.filter(team_id=team_id)
     players = Player.objects.filter(pk__in=team_players_id)
@@ -78,6 +77,7 @@ def createPlayer(request):
     else:
         form = PlayerForm()
     return render(request, 'createplayer.html', {'form': form})
+
 
 @unauthenticated_user
 @allowed_users(allowed_groups=['Admin'])
